@@ -23,7 +23,7 @@ def already_did_that(n, b):
 
     while not repeating:
         # calculate the new worker id
-        z = new_id(n, k)
+        z = new_id(n, k, b)
 
         # reset the worker id
         n = z
@@ -43,7 +43,7 @@ def already_did_that(n, b):
 
 
 
-def new_id(current_id, num_digits):
+def new_id(current_id, num_digits, base):
     # take in the current ID and the number of digits, "k"
     x_n = sorted(str(current_id), reverse = True)
     y_n = sorted(str(current_id))
@@ -54,6 +54,19 @@ def new_id(current_id, num_digits):
         x_n.append('0'*(num_digits - len(x_n)))
 
     # find the new worker id "z"
-    x = int(''.join(x_n))
-    y = int(''.join(y_n))
-    return x-y
+    x = int(''.join(x_n), base)
+    y = int(''.join(y_n), base)
+    return convert_to_base(x-y, base)
+
+def convert_to_base(n, base):
+    # we were told the highest base would be 10, so no need to worry about letters
+    num_left = n
+    n_str = ''
+    if n < base:
+        return n
+    else:
+        while num_left > 0:
+            remainder = num_left%base
+            num_left = num_left//base
+            n_str = str(remainder)+n_str
+    return int(n_str)
