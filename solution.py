@@ -43,7 +43,7 @@ def already_did_that(n, b):
 
 
 
-def new_id(current_id, num_digits, base):
+def new_id(current_id, num_digits):
     # take in the current ID and the number of digits, "k"
     x_n = sorted(str(current_id), reverse = True)
     y_n = sorted(str(current_id))
